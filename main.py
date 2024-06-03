@@ -7,7 +7,6 @@ app = Flask(__name__)
 # Load model
 model_ann = load_model('predictor.h5')
 
-# Fungsi untuk mengubah Temperatur ke kondisi yang sesuai
 def temperatur_to_cond(temp):
     if temp < 30:
         return 0
@@ -18,7 +17,6 @@ def temperatur_to_cond(temp):
     else:
         return 3
 
-# Fungsi untuk mengubah Kelembaban ke kondisi yang sesuai
 def kelembaban_to_cond(humidity):
     if humidity > 80:
         return 0
@@ -29,7 +27,6 @@ def kelembaban_to_cond(humidity):
     else:
         return 3
 
-# Fungsi untuk mengubah Ketinggian air ke kondisi yang sesuai
 def water_level_to_cond(water_level):
     if water_level < 30:
         return 0
@@ -69,7 +66,9 @@ def predict():
     prediction = predict_condition(temperatur, kelembaban, ketinggian_air)
 
     # Mengembalikan hasil prediksi dalam bentuk JSON
-    return jsonify({'prediksi': prediction})
+    response = jsonify({'prediksi': prediction})
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
