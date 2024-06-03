@@ -2,3 +2,4 @@ Flask
 numpy
 tensorflow
 gunicorn
+flask-cors
