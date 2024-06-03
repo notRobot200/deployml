@@ -68,6 +68,8 @@ def predict():
     # Mengembalikan hasil prediksi dalam bentuk JSON
     response = jsonify({'prediksi': prediction})
     response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Methods', 'POST, OPTIONS')  
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type')  
     return response
 
 if __name__ == '__main__':
